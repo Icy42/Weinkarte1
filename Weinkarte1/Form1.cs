@@ -21,20 +21,45 @@ namespace Weinkarte1
             };
 
             //DataGridView mit den Produkten befüllen
-
+         
             dataGridViewProducts.DataSource = products;
 
-            //""Alle Kategorien" in jede ComboBox schreiben"
-            comboBoxName.Items.Add("Alle Kategorien");
+            //ComboBox mit den Kategorien befüllen
             comboBoxCategory.Items.Add("Alle Kategorien");
+            comboBoxName.Items.Add("Alle Kategorien");
             comboBoxPrice.Items.Add("Alle Kategorien");
             comboBoxStock.Items.Add("Alle Kategorien");
+
 
             //ComboBox befüllen
             comboBoxName.Items.AddRange(products.Select(products => products.Name).Distinct().ToArray());
             comboBoxCategory.Items.AddRange(products.Select(products => products.Category).Distinct().ToArray());
             comboBoxPrice.Items.AddRange(products.Select(products => products.Price).Distinct().ToArray());
             comboBoxStock.Items.AddRange(products.Select(products => products.Country).Distinct().ToArray());
+        }
+
+        public void buttonFilter_Click(object sender, EventArgs e)
+        {
+            string selectedName = comboBoxName.SelectedItem?.ToString();
+            string selectedCategory = comboBoxCategory.SelectedItem?.ToString();
+            string selectedPrice = comboBoxPrice.SelectedItem?.ToString();
+            string selectedStock = comboBoxStock.SelectedItem?.ToString();
+            List<Product> filteredProducts = new List<Product>();
+            foreach (DataGridViewRow row in dataGridViewProducts.Rows)
+            {
+                if (row.DataBoundItem is Product product)
+                {
+                    bool matchesName = string.IsNullOrEmpty(selectedName) || product.Name == selectedName;
+                    bool matchesCategory = string.IsNullOrEmpty(selectedCategory) || product.Category == selectedCategory;
+                    bool matchesPrice = string.IsNullOrEmpty(selectedPrice) || product.Price == selectedPrice;
+                    bool matchesStock = string.IsNullOrEmpty(selectedStock) || product.Country == selectedStock;
+                    if (matchesName && matchesCategory && matchesPrice && matchesStock)
+                    {
+                        filteredProducts.Add(product);
+                    }
+                }
+            }
+            dataGridViewProducts.DataSource = filteredProducts;
         }
 
         private void dataGridViewProducts_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -44,22 +69,22 @@ namespace Weinkarte1
 
         public void comboBoxCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            buttonFilter_Click(sender, e);
         }
 
         private void comboBoxName_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            buttonFilter_Click(sender, e);
         }
 
         private void comboBoxPrice_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            buttonFilter_Click(sender, e);
         }
 
         private void comboBoxStock_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            buttonFilter_Click(sender, e);
         }
     }
 
