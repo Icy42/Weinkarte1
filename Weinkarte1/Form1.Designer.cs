@@ -50,7 +50,7 @@
             dataGridViewProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewProducts.Location = new Point(12, 149);
             dataGridViewProducts.Name = "dataGridViewProducts";
-            dataGridViewProducts.Size = new Size(502, 289);
+            dataGridViewProducts.Size = new Size(502, 272);
             dataGridViewProducts.TabIndex = 1;
             dataGridViewProducts.CellContentClick += dataGridViewProducts_CellContentClick;
             // 
@@ -85,7 +85,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(693, 451);
             Controls.Add(comboBoxStock);
             Controls.Add(comboBoxPrice);
             Controls.Add(comboBoxName);
