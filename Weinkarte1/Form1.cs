@@ -1,5 +1,7 @@
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -20,30 +22,9 @@ namespace Weinkarte1
 
         public void Form1_Load(object sender, EventArgs e)
         {
-            List<Product> products = new List<Product>
-            {
-            new Product("Elektronik", "test", "16€", "DE"),
-            new Product("Plastik", "test1", "17€", "ES"),
-            new Product("Stoff", "test2", "12€", "IT"),
-            new Product("Polyester", "test3", "10€", "AT"),
-            new Product("Luft", "test4", "11€", "CH"),
-            new Product("Ueberfluessig", "test5", "17€", "NL"),
-            new Product("Wein Spätlese", "Rotwein", "12€", "DE"),
-            new Product("Wein Kabinett", "Weißwein", "10€", "DE"),
-            new Product("Rosé Classic", "Rosé", "9€", "FR"),
-            new Product("Sekt Brut", "Schaumwein", "15€", "DE"),
-            new Product("Dessertwein", "Süßwein", "20€", "IT"),
-            new Product("Traubenmix", "Verschnitt", "7€", "ES"),
-            new Product("Reserve", "Rotwein", "22€", "PT"),
-            new Product("Cuvée", "Rotwein", "18€", "FR"),
-            new Product("Fumé Blanc", "Weißwein", "14€", "US"),
-            new Product("Chardonnay", "Weißwein", "13€", "AU"),
-            new Product("Merlot", "Rotwein", "11€", "IT"),
-            new Product("Pinot Noir", "Rotwein", "19€", "FR"),
-            new Product("Riesling", "Weißwein", "12€", "DE"),
-            new Product("Grüner Veltliner", "Weißwein", "9€", "AT"),
-            new Product("Prosecco", "Schaumwein", "8€", "IT")
-            };
+            // Pfad anpassen, falls Sie Excel wirklich laden wollen
+            string path = "products.xlsx";
+            var products = LoadProductsFromExcel(path);
 
             // Basisliste merken und DataGridView über BindingSource binden
             allProducts = products;
@@ -66,6 +47,39 @@ namespace Weinkarte1
             comboBoxCategory.SelectedIndex = 0;
             comboBoxPrice.SelectedIndex = 0;
             comboBoxStock.SelectedIndex = 0;
+        }
+
+        private List<Product> LoadProductsFromExcel(string path)
+        {
+            // Bei Bedarf: tatsächliches Einlesen aus Excel (XLWorkbook) verwenden.
+            // Aktuell wird die Beispiel-Liste aus dem ursprünglichen Code zurückgegeben:
+            List<Product> products = new List<Product>
+            {
+
+                new Product("Elektronik", "test", "16€", "DE"),
+                new Product("Plastik", "test1", "17€", "ES"),
+                new Product("Stoff", "test2", "12€", "IT"),
+                new Product("Polyester", "test3", "10€", "AT"),
+                new Product("Luft", "test4", "11€", "CH"),
+                new Product("Ueberfluessig", "test5", "17€", "NL"),
+                new Product("Wein Spätlese", "Rotwein", "12€", "DE"),
+                new Product("Wein Kabinett", "Weißwein", "10€", "DE"),
+                new Product("Rosé Classic", "Rosé", "9€", "FR"),
+                new Product("Sekt Brut", "Schaumwein", "15€", "DE"),
+                new Product("Dessertwein", "Süßwein", "20€", "IT"),
+                new Product("Traubenmix", "Verschnitt", "7€", "ES"),
+                new Product("Reserve", "Rotwein", "22€", "PT"),
+                new Product("Cuvée", "Rotwein", "18€", "FR"),
+                new Product("Fumé Blanc", "Weißwein", "14€", "US"),
+                new Product("Chardonnay", "Weißwein", "13€", "AU"),
+                new Product("Merlot", "Rotwein", "11€", "IT"),
+                new Product("Pinot Noir", "Rotwein", "19€", "FR"),
+                new Product("Riesling", "Weißwein", "12€", "DE"),
+                new Product("Grüner Veltliner", "Weißwein", "9€", "AT"),
+                new Product("Prosecco", "Schaumwein", "8€", "IT")
+            };
+
+            return products; 
         }
 
         public void buttonFilter_Click(object sender, EventArgs e)
